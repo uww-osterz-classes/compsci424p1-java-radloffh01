@@ -8,6 +8,7 @@
  * problem and display your solution in the correct format.
  */
 package compsci424.p1.java;
+import java.util.Scanner;
 
 /**
  * Main class for this program. The required steps have been copied
@@ -26,10 +27,76 @@ public class Program1 {
         // 1. Ask the user to enter commands of the form "create N",
         //    "destroy N", or "end", where N is an integer between 0 
         //    and 15.
+        Scanner sc = new Scanner(System.in);
+        String userIn = "";
+        int userNum = 0;
+        //System.out.println("Create, Destroy or End, where N is an integer between 0 and 15");
+        //userIn = sc.nextLine();
 
         // 2. While the user has not typed "end", continue accepting
         //    commands. Add each command to a list of actions to take 
         //    while you run the simulation.
+
+        while(!userIn.equals("End")){
+            System.out.println("Do you want to Create, Destroy or End");
+            userIn = sc.nextLine();
+
+            //if create
+            if(userIn.equals("Create")){
+                System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
+                userNum = sc.nextInt();
+                while(userNum < 0 || userNum > 15){
+                    System.out.println("Invalid Integer, try again");
+                    System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
+                    userNum = sc.nextInt();
+                }
+
+                Version1 v1 = new Version1();
+                v1.create(userNum);
+                Version2 v2 = new Version2();
+                v2.create(userNum);
+                userNum = 0;
+
+            }else
+
+            //if destroy
+            if(userIn.equals("Destroy")){
+                System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
+                userNum = sc.nextInt();
+                while(userNum < 0 || userNum > 15){
+                    System.out.println("Invalid Integer, try again");
+                    System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
+                    userNum = sc.nextInt();
+                }
+
+                Version1 v1 = new Version1();
+                v1.destroy(userNum);
+                Version2 v2 = new Version2();
+                v2.destroy(userNum);
+                userNum = 0;
+            }else
+
+            if(userIn.equals("End")){
+                Version1 v1 = new Version1();
+                Version2 v2 = new Version2();
+
+                for(int i = 0; i < 1; i++){
+                    v1.create(i);
+                    v1.showProcessInfo();
+                    v2.create(i);
+                    v2.showProcessInfo();
+                    v1.destroy(i);
+                    v1.showProcessInfo();
+                    v2.destroy(i);
+                    v2.showProcessInfo();
+                }
+                break;
+            }
+
+            else {
+                System.out.println("Invalid Input, try again\n");
+            }
+        }
         // 3. When the user types "end" (or optionally any word that 
         //    is not "create" or "destroy"), stop accepting commands 
         //    and complete the following steps.
