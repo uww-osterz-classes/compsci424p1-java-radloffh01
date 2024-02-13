@@ -15,6 +15,7 @@ package compsci424.p1.java;
  */
 public class Version1 {
     // Declare any class/instance variables that you need here.
+    Version1PCB pcb[] = new Version1PCB[15];
 
     /**
      * Default constructor. Use this to allocate (if needed) and
@@ -22,7 +23,11 @@ public class Version1 {
      * any other initialization that is needed. 
      */
     public Version1() {
-
+        pcb[0] = new Version1PCB(0);
+        for(int i = 1; i < pcb.length; i++){
+            pcb[i] = null;
+        }
+        
     }
 
     /**
@@ -34,10 +39,21 @@ public class Version1 {
         // If parentPid is not in the process hierarchy, do nothing; 
         // your code may return an error code or message in this case,
         // but it should not halt
+        if(pcb[parentPid] == null){
+            System.out.println("Error: That parent process doesn't exist'");
+        }
+        
 
         // Assuming you've found the PCB for parentPid in the PCB array:
         // 1. Allocate and initialize a free PCB object from the array
         //    of PCB objects
+        if(firstFreeIndex() == -1){
+            System.out.println("Error: The are no free PCBs'");
+        }
+        int childIndex = firstFreeIndex();
+        pcb[parentPid].getChildren().addLast(childIndex);
+        pcb[childIndex] = new Version1PCB(parentPid);
+
 
         // 2. Insert the newly allocated PCB object into parentPid's
         //    list of children
@@ -88,5 +104,14 @@ public class Version1 {
     }
 
     /* If you need or want more methods, feel free to add them. */
+
+    int firstFreeIndex(){
+        for(int i = 0; i < pcb.length; i++){
+            if(pcb[i] == null){
+                return i;
+            }
+        }
+        return -1;
+    }
     
 }

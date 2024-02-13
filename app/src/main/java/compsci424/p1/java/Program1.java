@@ -18,7 +18,8 @@ import java.util.Scanner;
  */
 public class Program1 {
     // Declare any class/instance variables that you need here.
-
+    //Version1PCB v1pcb = new Version1PCB();
+    //Version2PCB v2pcb = new Version2PCB();
     /**
      * @param args command-line arguments, which can be ignored
      */
