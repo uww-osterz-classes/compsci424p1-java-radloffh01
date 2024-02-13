@@ -41,7 +41,7 @@ public class Version1 {
         // but it should not halt
         if(pcb[parentPid] == null){
             System.out.println("Error: That parent process doesn't exist'");
-        }
+        }else
         
 
         // Assuming you've found the PCB for parentPid in the PCB array:
@@ -49,10 +49,11 @@ public class Version1 {
         //    of PCB objects
         if(firstFreeIndex() == -1){
             System.out.println("Error: The are no free PCBs'");
+        }else{
+            int childIndex = firstFreeIndex();
+            pcb[parentPid].getChildren().addLast(childIndex);
+            pcb[childIndex] = new Version1PCB(parentPid);
         }
-        int childIndex = firstFreeIndex();
-        pcb[parentPid].getChildren().addLast(childIndex);
-        pcb[childIndex] = new Version1PCB(parentPid);
 
 
         // 2. Insert the newly allocated PCB object into parentPid's
@@ -73,6 +74,16 @@ public class Version1 {
          // If targetPid is not in the process hierarchy, do nothing; 
          // your code may return an error code or message in this case,
          // but it should not halt
+         if(pcb[targetPid] == null){
+            System.out.println("Error: That process isn't running");
+        }else{
+            while(pcb[targetPid].getChildren().size() > 0){
+                for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
+                    pcb[targetPid].getChildren().set(i, null);
+                }
+            }
+            pcb[targetPid] = null;
+        }
 
          // Assuming you've found the PCB for targetPid in the PCB array:
          // 1. Recursively destroy all descendants of targetPid, if it
