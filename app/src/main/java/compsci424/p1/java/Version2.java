@@ -15,6 +15,7 @@ package compsci424.p1.java;
  */
 public class Version2 {
     // Declare any class/instance variables that you need here.
+    Version2PCB pcb[] = new Version2PCB[];
 
     /**
      * Default constructor. Use this to allocate (if needed) and
