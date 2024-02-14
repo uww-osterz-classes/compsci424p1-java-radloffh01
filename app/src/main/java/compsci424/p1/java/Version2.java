@@ -56,7 +56,7 @@ public class Version2 {
             if(firstChild == -1){
                 pcb[parentPid].setFirstChild(firstChild);
             }else{
-                setYoungSib(firstChild, childIndex);
+                setYoungestSib(firstChild, childIndex);
             }
         }
 
@@ -161,9 +161,9 @@ public class Version2 {
         return -1;
     }
 
-    void setYoungSib(int olderChild, int youngestChild){
+    void setYoungestSib(int olderChild, int youngestChild){
         if(pcb[olderChild].getYoungSib() != -1){
-            setYoungSib(pcb[olderChild].getYoungSib(), youngestChild);
+            setYoungestSib(pcb[olderChild].getYoungSib(), youngestChild);
 
         }else if(pcb[olderChild].getOldSib() != -1){
             pcb[olderChild].setYoungSib(youngestChild);
