@@ -131,12 +131,22 @@ public class Version2 {
             if(pcb[i] == null){
                 break;
             }
-            LinkedList<Integer> childList = new LinkedList<Integer>();
+            //LinkedList<Integer> childList = new LinkedList<Integer>();
             // int child = pcb[i].getFirstChild();
             // while(pcb[child].getYoungSib() != -1){
             //     childList.add(child);
             // }
-            System.out.println("Process " + i + ": parent is " + pcb[i].getParent() + " and children are " + childList);
+            System.out.print("Process " + i + ": parent is " + pcb[i].getParent());
+            if(pcb[i].getFirstChild() == -1){
+                System.out.println(" and has no children");
+            }else{
+                int os = pcb[i].getFirstChild();
+                System.out.print(" and children are ");
+                while(pcb[os].getYoungSib() != -1){
+                    System.out.print(os + " ");
+                    os = pcb[os].getYoungSib();
+                }
+            }
         }
    }
 
