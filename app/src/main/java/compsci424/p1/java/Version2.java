@@ -128,9 +128,9 @@ public class Version2 {
     */
    void showProcessInfo() {
         for(int i = 0; i < pcb.length-1; i++){
-            if(pcb[i] == null){
-                break;
-            }
+            if(pcb[i] != null){
+                
+            
             //LinkedList<Integer> childList = new LinkedList<Integer>();
             // int child = pcb[i].getFirstChild();
             // while(pcb[child].getYoungSib() != -1){
@@ -148,6 +148,7 @@ public class Version2 {
                 }
             }
         }
+    }
    }
 
    /* If you need or want more methods, feel free to add them. */
