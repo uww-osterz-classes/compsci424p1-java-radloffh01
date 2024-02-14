@@ -140,14 +140,15 @@ public class Version2 {
             if(pcb[i].getFirstChild() == -1){
                 System.out.println(" and has no children");
             }else{
-                int os = pcb[i].getFirstChild();
+                int c = pcb[i].getFirstChild();
                 System.out.print(" and children are ");
-                while(pcb[os].getYoungSib() != -1){
-                    System.out.println(os + " ");
-                    os = pcb[os].getYoungSib();
+                while(c != -1){
+                    System.out.print(c + " ");
+                    c = pcb[c].getYoungSib();
                 }
                 System.out.println("");
             }
+            //System.out.println("");
         }
     }
    }
@@ -163,14 +164,14 @@ public class Version2 {
     }
 
     void setYoungestSib(int olderChild, int youngestChild){
-        if(pcb[olderChild].getYoungSib() != -1){
+        if(pcb[olderChild].getYoungSib() != -1){//if the first/oldest sib doesn't have a youngest sib
             setYoungestSib(pcb[olderChild].getYoungSib(), youngestChild);
 
         }else if(pcb[olderChild].getOldSib() != -1){
             pcb[olderChild].setYoungSib(youngestChild);
             pcb[youngestChild].setOldSib(olderChild);
 
-        }else if(pcb[olderChild].getOldSib() != -1){
+        }else if(pcb[olderChild].getOldSib() == -1){
             pcb[olderChild].setYoungSib(youngestChild);
         }
     }
