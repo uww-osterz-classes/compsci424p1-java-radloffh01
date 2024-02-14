@@ -54,7 +54,7 @@ public class Version2 {
             int firstChild = pcb[parentPid].getFirstChild();
 
             if(firstChild == -1){
-                pcb[parentPid].setFirstChild(firstChild);
+                pcb[parentPid].setFirstChild(childIndex);
             }else{
                 setYoungestSib(firstChild, childIndex);
             }
