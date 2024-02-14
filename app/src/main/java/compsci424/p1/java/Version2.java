@@ -132,10 +132,10 @@ public class Version2 {
                 break;
             }
             LinkedList<Integer> childList = new LinkedList<Integer>();
-            int child = pcb[i].getFirstChild();
-            while(pcb[child].getYoungSib() != -1){
-                childList.add(child);
-            }
+            // int child = pcb[i].getFirstChild();
+            // while(pcb[child].getYoungSib() != -1){
+            //     childList.add(child);
+            // }
             System.out.println("Process " + i + ": parent is " + pcb[i].getParent() + " and children are " + childList);
         }
    }

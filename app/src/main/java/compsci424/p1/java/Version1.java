@@ -51,7 +51,7 @@ public class Version1 {
             System.out.println("Error: The are no free PCBs'");
         }else{
             int childIndex = firstFreeIndex();
-            pcb[parentPid].getChildren().addLast(childIndex);
+            pcb[parentPid].addChild(childIndex);
             pcb[childIndex] = new Version1PCB(parentPid);
         }
 
