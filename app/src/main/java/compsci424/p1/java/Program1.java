@@ -66,7 +66,7 @@ public class Program1 {
                 break;
             }
             userNum = sc.nextInt();
-            System.out.println(userNum);
+            //System.out.println(userNum);
 
             //if create
             if(userIn.equals("create")){

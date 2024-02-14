@@ -111,7 +111,6 @@ public class Version1 {
 				if (index != parent) {
 					pcb[pcb[index].getParent()].getChildren().removeFirst(); //delete node off of parent's children linked list 
 					//delete?
-                    pcb[index].getChildren().removeFirst();
 					pcb[index] = null;
 					break;
 				}
