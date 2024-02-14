@@ -77,12 +77,16 @@ public class Version1 {
          if(pcb[targetPid] == null){
             System.out.println("Error: That process isn't running");
         }else{
-            while(pcb[targetPid].getChildren().size() > 0){
-                for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
-                    pcb[targetPid].getChildren().clear();
-                }
-            }
-            pcb[targetPid] = null;
+            destroy(targetPid, targetPid);
+            // while(pcb[targetPid].getChildren().size() > 0){
+            //     for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
+            //         pcb[targetPid].getChildren().removeFirst();
+            //     }
+            // }
+            // int parent = pcb[targetPid].getParent();
+            // int index = pcb[parent].getChildren().indexOf(targetPid);
+            // pcb[parent].getChildren().remove(index);
+            // pcb[targetPid] = null;
         }
 
          // Assuming you've found the PCB for targetPid in the PCB array:
@@ -98,6 +102,27 @@ public class Version1 {
          // You can decide what the return value(s), if any, should be.
          // If you change the return type/value(s), update the Javadoc.
         return 0; // often means "success" or "terminated normally"
+    }
+
+    int destroy(int index, int parent){
+        do //finds and deallocates all of the children/ decendents from memory of given parent node
+		{
+			if (pcb[index].getChildren().size() == 0) {
+				if (index != parent) {
+					pcb[pcb[index].getParent()].getChildren().removeFirst(); //delete node off of parent's children linked list 
+					//delete?
+					pcb[index] = null;
+					break;
+				}
+			}
+			else{
+                int c = pcb[index].getFirstChild();
+				destroy(c, parent);
+            }
+
+		} while (pcb[index].getChildren().size() > 0);
+    
+        return 0;
     }
 
     /**
