@@ -104,13 +104,37 @@ public class Version1 {
         return 0; // often means "success" or "terminated normally"
     }
 
+    // int destroy(int targetPid){
+    //     if(pcb[targetPid] == null){
+    //         System.out.println("Error: That process isn't running");
+    //     }else{
+
+    //     while(pcb[targetPid].getChildren().size() > 0){
+    //         int lastDescend = pcb[targetPid].getChildren().getLast();
+    //         if(pcb[lastDescend].getChildren().size() > 0){
+    //             pcb[lastDescend].getChildren().clear();
+    //         }
+    //         pcb[targetPid].getChildren().removeLast();
+    //         destroy(lastDescend);
+    //     }
+    //     int targetParent = pcb[targetPid].getParent();
+    //     int targetIndex = pcb[targetParent].getChildren().indexOf(targetPid);
+    //     pcb[targetParent].getChildren().remove(targetIndex);
+
+    //     pcb[targetPid] = null;
+    // }
+    //     return 0;
+    // }
+
     int destroy(int index, int parent){
         do //finds and deallocates all of the children/ decendents from memory of given parent node
 		{
 			if (pcb[index].getChildren().size() == 0) {
 				if (index != parent) {
-					pcb[pcb[index].getParent()].getChildren().removeFirst(); //delete node off of parent's children linked list 
+					//pcb[pcb[index].getParent()].getChildren().removeFirst(); //delete node off of parent's children linked list 
 					//delete?
+                    int indexInParent = pcb[parent].getChildren().indexOf(index);
+                    pcb[parent].getChildren().remove(indexInParent);
 					pcb[index] = null;
 					break;
 				}
