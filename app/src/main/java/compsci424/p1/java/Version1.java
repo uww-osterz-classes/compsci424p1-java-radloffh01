@@ -79,7 +79,7 @@ public class Version1 {
         }else{
             while(pcb[targetPid].getChildren().size() > 0){
                 for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
-                    pcb[targetPid].getChildren().set(i, null);
+                    pcb[targetPid].getChildren().clear();
                 }
             }
             pcb[targetPid] = null;
@@ -115,7 +115,18 @@ public class Version1 {
                 if(pcb[i] == null){
                     break;
                 }
-                System.out.println("Process " + i + ": parent is " + pcb[i].getParent() + " and children are " + pcb[i].getChildren());
+                System.out.print("Process " + i + ": parent is " + pcb[i].getParent());
+                if(pcb[i].getChildren().size() == 0){
+                    System.out.println(" and has no children");
+                }else{
+                    System.out.print(" and children are ");
+                
+                    for(int j = 0; j < pcb[i].getChildren().size(); j++){
+                        System.out.print(pcb[i].getChildren().get(j) +  " ");
+                    }
+                    System.out.println("");
+                }
+                //System.out.println("");
             }
     }
 
