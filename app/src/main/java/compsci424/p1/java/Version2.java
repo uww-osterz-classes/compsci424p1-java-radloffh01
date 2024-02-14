@@ -143,9 +143,10 @@ public class Version2 {
                 int os = pcb[i].getFirstChild();
                 System.out.print(" and children are ");
                 while(pcb[os].getYoungSib() != -1){
-                    System.out.print(os + " ");
+                    System.out.println(os + " ");
                     os = pcb[os].getYoungSib();
                 }
+                System.out.println("");
             }
         }
     }
