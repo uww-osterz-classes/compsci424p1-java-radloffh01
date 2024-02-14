@@ -74,31 +74,42 @@ public class Version2 {
      * @param targetPid the PID of the process to be destroyed
      * @return 0 if successful, not 0 if unsuccessful
      */
-    int destroy (int targetPid) {
-        // If targetPid is not in the process hierarchy, do nothing; 
-        // your code may return an error code or message in this case,
-        // but it should not halt
+
+    int destroy(int targetPid){
         if(pcb[targetPid] == null){
             System.out.println("Error: That process isn't running");
         }else{
-            do {
-                if (pcb[targetPid].getFirstChild() != -1) { //Checks for children
-                    destroy(pcb[targetPid].getFirstChild());
-                    pcb[targetPid].setFirstChild(-1);
-                }
-                else if (pcb[targetPid].getYoungSib() != -1) { //Check for younger siblings
-                    destroy(pcb[targetPid].getYoungSib());
-                    pcb[targetPid].setYoungSib(-1);
-                }
-                // else if (index != almightyParent) { //If not parent that origionally called function
-                //     delete v2[index];
-                //     v2[index] = NULL;
-                //     break;
-                // }
-                else
-                    break;
-            } while (true);
+            destroy(targetPid, targetPid);
         }
+        return 0;
+    }
+    int destroy (int index, int parent) {
+        // If targetPid is not in the process hierarchy, do nothing; 
+        // your code may return an error code or message in this case,
+        // but it should not halt
+            do {
+                if (pcb[index].getFirstChild() != -1) { //Checks for children
+                    destroy(pcb[index].getFirstChild(), parent);
+                    pcb[index].setFirstChild(-1);
+                }
+                else if (pcb[index].getYoungSib() != -1) { //Check for younger siblings
+                    destroy(pcb[index].getYoungSib(), parent);
+                    pcb[index].setYoungSib(-1);
+                }
+                else if (index != parent) { //If not parent that origionally called function
+                    //delete v2[index];
+                    
+                    pcb[index] = null;
+                    break;
+                }
+                else{
+                    break;
+                }
+                
+            }while (true);
+        
+    
+    
 
         // Assuming you've found the PCB for targetPid in the PCB array:
         // 1. Recursively destroy all descendants of targetPid, if it
