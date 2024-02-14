@@ -2,6 +2,7 @@
  * Name:
  */
 package compsci424.p1.java;
+import java.util.LinkedList;
 
 /** 
  * Implements the process creation hierarchy for Version 2, which does
@@ -126,7 +127,17 @@ public class Version2 {
     * the main program for printing. It's your choice. 
     */
    void showProcessInfo() {
-    
+        for(int i = 0; i < pcb.length; i++){
+            if(pcb[i] == null){
+                break;
+            }
+            LinkedList<Integer> childList = new LinkedList<Integer>();
+            int child = pcb[i].getFirstChild();
+            while(pcb[child].getYoungSib() != -1){
+                childList.add(child);
+            }
+            System.out.println("Process " + i + " parent is " + pcb[i].getParent() + " and children are " + childList);
+        }
    }
 
    /* If you need or want more methods, feel free to add them. */
