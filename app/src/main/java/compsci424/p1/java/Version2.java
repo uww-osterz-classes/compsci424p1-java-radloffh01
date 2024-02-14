@@ -77,6 +77,27 @@ public class Version2 {
         // If targetPid is not in the process hierarchy, do nothing; 
         // your code may return an error code or message in this case,
         // but it should not halt
+        if(pcb[targetPid] == null){
+            System.out.println("Error: That process isn't running");
+        }else{
+            do {
+                if (pcb[targetPid].getFirstChild() != -1) { //Checks for children
+                    destroy(pcb[targetPid].getFirstChild());
+                    pcb[targetPid].setFirstChild(-1);
+                }
+                else if (pcb[targetPid].getYoungSib() != -1) { //Check for younger siblings
+                    destroy(pcb[targetPid].getYoungSib());
+                    pcb[targetPid].setYoungSib(-1);
+                }
+                // else if (index != almightyParent) { //If not parent that origionally called function
+                //     delete v2[index];
+                //     v2[index] = NULL;
+                //     break;
+                // }
+                else
+                    break;
+            } while (true);
+        }
 
         // Assuming you've found the PCB for targetPid in the PCB array:
         // 1. Recursively destroy all descendants of targetPid, if it
