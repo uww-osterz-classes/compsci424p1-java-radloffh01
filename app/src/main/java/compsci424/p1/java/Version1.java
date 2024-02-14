@@ -111,7 +111,12 @@ public class Version1 {
      * the main program for printing. It's your choice. 
      */
     void showProcessInfo() {
-
+            for(int i = 0; i < pcb.length; i++){
+                if(pcb[i] == null){
+                    break;
+                }
+                System.out.println("Process " + i + " parent is " + pcb[i].getParent() + " and children are " + pcb[i].getChildren());
+            }
     }
 
     /* If you need or want more methods, feel free to add them. */
