@@ -24,7 +24,7 @@ public class Version2 {
      * any other initialization that is needed. 
      */
     public Version2() {
-        pcb[0] = new Version2PCB(0);
+        pcb[0] = new Version2PCB(-1);
         for(int i = 1; i < pcb.length; i++){
             pcb[i] = null;
         }
@@ -127,7 +127,7 @@ public class Version2 {
     * the main program for printing. It's your choice. 
     */
    void showProcessInfo() {
-        for(int i = 0; i < pcb.length; i++){
+        for(int i = 0; i < pcb.length-1; i++){
             if(pcb[i] == null){
                 break;
             }
@@ -136,7 +136,7 @@ public class Version2 {
             while(pcb[child].getYoungSib() != -1){
                 childList.add(child);
             }
-            System.out.println("Process " + i + " parent is " + pcb[i].getParent() + " and children are " + childList);
+            System.out.println("Process " + i + ": parent is " + pcb[i].getParent() + " and children are " + childList);
         }
    }
 

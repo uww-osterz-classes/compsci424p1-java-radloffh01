@@ -162,6 +162,7 @@ public class Program1 {
 
         // This line is here just to test the Gradle build procedure.
         // You can delete it.
+        sc.close();
         System.out.println("Builds without errors and runs to completion.");
     }
 }

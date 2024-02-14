@@ -23,7 +23,7 @@ public class Version1 {
      * any other initialization that is needed. 
      */
     public Version1() {
-        pcb[0] = new Version1PCB(0);
+        pcb[0] = new Version1PCB(-1);
         for(int i = 1; i < pcb.length; i++){
             pcb[i] = null;
         }
@@ -115,7 +115,7 @@ public class Version1 {
                 if(pcb[i] == null){
                     break;
                 }
-                System.out.println("Process " + i + " parent is " + pcb[i].getParent() + " and children are " + pcb[i].getChildren());
+                System.out.println("Process " + i + ": parent is " + pcb[i].getParent() + " and children are " + pcb[i].getChildren());
             }
     }
 
