@@ -81,23 +81,59 @@ public class Program1 {
                 Version1 v1 = new Version1();
                 Version2 v2 = new Version2();
 
-                for(int i = 0; i < 1; i++){
-                    v1.create(i);
-                    v1.showProcessInfo();
-                    v2.create(i);
-                    v2.showProcessInfo();
-                    v1.destroy(i);
-                    v1.showProcessInfo();
-                    v2.destroy(i);
-                    v2.showProcessInfo();
-                }
+                // for(int i = 0; i < 1; i++){
+                //     v1.create(i);
+                //     v1.showProcessInfo();
+                //     v2.create(i);
+                //     v2.showProcessInfo();
+                //     v1.destroy(i);
+                //     v1.showProcessInfo();
+                //     v2.destroy(i);
+                //     v2.showProcessInfo();
+                // }
+                v1.create(5);
+                v1.showProcessInfo();
+                v2.create(5);
+                v2.showProcessInfo();
                 break;
             }
 
-            else {
-                System.out.println("Invalid Input, try again\n");
+            // else {
+            //     System.out.println("Invalid Input, try again\n");
+            // }
+        }
+        long startTime = System.currentTimeMillis();
+        Version1 v1 = new Version1();
+        for(int i = 0; i <= 200; i++){
+            int method = (int)Math.random() * 2;
+            int number = (int)Math.random() * 15;
+            if(method == 0){
+                v1.create(number);
+            }
+            if(method == 1 || method == 2){
+                v1.destroy(number);
             }
         }
+        long stopTime = System.currentTimeMillis();
+        long runTime = stopTime-startTime;
+        System.out.println("Version 1 Run Time: " + runTime);
+
+
+        startTime = System.currentTimeMillis();
+        Version1 v2 = new Version1();
+        for(int i = 0; i <= 200; i++){
+            int method = (int)Math.random() * 2;
+            int number = (int)Math.random() * 15;
+            if(method == 0){
+                v2.create(number);
+            }
+            if(method == 1 || method == 2){
+                v2.destroy(number);
+            }
+        }
+        stopTime = System.currentTimeMillis();
+        runTime = stopTime-startTime;
+        System.out.println("Version 2 Run Time: " + runTime);
         // 3. When the user types "end" (or optionally any word that 
         //    is not "create" or "destroy"), stop accepting commands 
         //    and complete the following steps.
