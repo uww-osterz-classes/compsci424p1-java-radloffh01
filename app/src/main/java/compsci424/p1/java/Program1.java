@@ -59,9 +59,9 @@ public class Program1 {
                 //     v2.destroy(i);
                 //     v2.showProcessInfo();
                 // }
-                v1.create(0);
+                //v1.create(0);
                 v1.showProcessInfo();
-                v2.create(0);
+                //v2.create(0);
                 //v2.showProcessInfo();
                 break;
             }
