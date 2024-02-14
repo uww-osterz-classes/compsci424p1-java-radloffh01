@@ -98,9 +98,9 @@ public class Program1 {
                 break;
             }
 
-            // else {
-            //     System.out.println("Invalid Input, try again\n");
-            // }
+            else {
+                
+            }
         }
         long startTime = System.currentTimeMillis();
         Version1 v1 = new Version1();
