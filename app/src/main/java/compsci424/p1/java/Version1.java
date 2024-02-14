@@ -137,9 +137,8 @@ public class Version1 {
      */
     void showProcessInfo() {
             for(int i = 0; i < pcb.length; i++){
-                if(pcb[i] == null){
-                    break;
-                }
+                if(pcb[i] != null){
+                
                 System.out.print("Process " + i + ": parent is " + pcb[i].getParent());
                 if(pcb[i].getChildren().size() == 0){
                     System.out.println(" and has no children");
@@ -153,6 +152,7 @@ public class Version1 {
                 }
                 //System.out.println("");
             }
+        }
     }
 
     /* If you need or want more methods, feel free to add them. */

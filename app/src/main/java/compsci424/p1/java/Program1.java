@@ -40,12 +40,12 @@ public class Program1 {
         //    commands. Add each command to a list of actions to take 
         //    while you run the simulation.
 
-        while(!userIn.equals("End")){
-            System.out.println("Do you want to Create N, Destroy N, or End, where N is an integer between 0 and 15");
+        while(!userIn.equals("end")){
+            System.out.println("Do you want to create N, destroy N, or end, where N is an integer between 0 and 15");
             userIn = sc.next();
 
             //if end is typed
-            if(userIn.equals("End")){
+            if(userIn.equals("end")){
                 // Version1 v1 = new Version1();
                 // Version2 v2 = new Version2();
 
@@ -69,7 +69,7 @@ public class Program1 {
             System.out.println(userNum);
 
             //if create
-            if(userIn.equals("Create")){
+            if(userIn.equals("create")){
                 // System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
                 // userNum = sc.nextInt();
                 // while(userNum < 0 || userNum > 15){
@@ -87,7 +87,7 @@ public class Program1 {
             }else
 
             //if destroy
-            if(userIn.equals("Destroy")){
+            if(userIn.equals("destroy")){
                 // System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
                 // userNum = sc.nextInt();
                 // while(userNum < 0 || userNum > 15){
