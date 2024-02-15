@@ -38,5 +38,8 @@ public class Version1PCB {
         children.addLast(child);
     }
 
+    public void removeChild(int c){
+        children.remove(c);
+    }
 
 }

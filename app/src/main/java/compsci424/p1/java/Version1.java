@@ -2,6 +2,7 @@
  * Name:
  */
 package compsci424.p1.java;
+import java.util.LinkedList;
 
 /** 
  * Implements the process creation hierarchy for Version 1, which uses
@@ -70,82 +71,56 @@ public class Version1 {
      * @param targetPid the PID of the process to be destroyed
      * @return 0 if successful, not 0 if unsuccessful
      */
-    int destroy (int targetPid) {
-         // If targetPid is not in the process hierarchy, do nothing; 
-         // your code may return an error code or message in this case,
-         // but it should not halt
-         if(pcb[targetPid] == null){
-            System.out.println("Error: That process isn't running");
-        }else{
-            destroy(targetPid, targetPid);
-            // while(pcb[targetPid].getChildren().size() > 0){
-            //     for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
-            //         pcb[targetPid].getChildren().removeFirst();
-            //     }
-            // }
-            // int parent = pcb[targetPid].getParent();
-            // int index = pcb[parent].getChildren().indexOf(targetPid);
-            // pcb[parent].getChildren().remove(index);
-            // pcb[targetPid] = null;
-        }
-
-         // Assuming you've found the PCB for targetPid in the PCB array:
-         // 1. Recursively destroy all descendants of targetPid, if it
-         //    has any, and mark their PCBs as "free" in the PCB array 
-         //    (i.e., deallocate them)
-
-         // 2. Remove targetPid from its parent's list of children
-
-         // 3. Deallocate targetPid's PCB and mark its PCB array entry
-         //    as "free"
-
-         // You can decide what the return value(s), if any, should be.
-         // If you change the return type/value(s), update the Javadoc.
-        return 0; // often means "success" or "terminated normally"
-    }
-
-    // int destroy(int targetPid){
-    //     if(pcb[targetPid] == null){
+    // int destroy (int targetPid) {
+    //      // If targetPid is not in the process hierarchy, do nothing; 
+    //      // your code may return an error code or message in this case,
+    //      // but it should not halt
+    //      if(pcb[targetPid] == null){
     //         System.out.println("Error: That process isn't running");
     //     }else{
-
-    //     while(pcb[targetPid].getChildren().size() > 0){
-    //         int lastDescend = pcb[targetPid].getChildren().getLast();
-    //         if(pcb[lastDescend].getChildren().size() > 0){
-    //             pcb[lastDescend].getChildren().clear();
-    //         }
-    //         pcb[targetPid].getChildren().removeLast();
-    //         destroy(lastDescend);
+    //         destroy(targetPid, targetPid);
+    //         // while(pcb[targetPid].getChildren().size() > 0){
+    //         //     for(int i = 0; i < pcb[targetPid].getChildren().size(); i++){
+    //         //         pcb[targetPid].getChildren().removeFirst();
+    //         //     }
+    //         // }
+    //         // int parent = pcb[targetPid].getParent();
+    //         // int index = pcb[parent].getChildren().indexOf(targetPid);
+    //         // pcb[parent].getChildren().remove(index);
+    //         // pcb[targetPid] = null;
     //     }
-    //     int targetParent = pcb[targetPid].getParent();
-    //     int targetIndex = pcb[targetParent].getChildren().indexOf(targetPid);
-    //     pcb[targetParent].getChildren().remove(targetIndex);
 
-    //     pcb[targetPid] = null;
-    // }
-    //     return 0;
+    //      // Assuming you've found the PCB for targetPid in the PCB array:
+    //      // 1. Recursively destroy all descendants of targetPid, if it
+    //      //    has any, and mark their PCBs as "free" in the PCB array 
+    //      //    (i.e., deallocate them)
+
+    //      // 2. Remove targetPid from its parent's list of children
+
+    //      // 3. Deallocate targetPid's PCB and mark its PCB array entry
+    //      //    as "free"
+
+    //      // You can decide what the return value(s), if any, should be.
+    //      // If you change the return type/value(s), update the Javadoc.
+    //     return 0; // often means "success" or "terminated normally"
     // }
 
-    int destroy(int index, int parent){
-        do //finds and deallocates all of the children/ decendents from memory of given parent node
-		{
-			if (pcb[index].getChildren().size() == 0) {
-				if (index != parent) {
-					//pcb[pcb[index].getParent()].getChildren().removeFirst(); //delete node off of parent's children linked list 
-					//delete?
-                    int indexInParent = pcb[parent].getChildren().indexOf(index);
-                    pcb[parent].getChildren().remove(indexInParent);
-					pcb[index] = null;
-					break;
-				}
-			}
-			else{
-                int c = pcb[index].getFirstChild();
-				destroy(c, parent);
+    int destroy(int targetPid){
+        if(pcb[targetPid] == null){
+            System.out.println("Error: That process isn't running");
+        }else{
+            for (int q : pcb[targetPid].getChildren()) {
+                destroy(q);
+                pcb[q] = null;
+                //pcb[targetPid] = null;
+                //int p = pcb[targetPid].getParent();
             }
+            int p = pcb[targetPid].getParent();
+            int index = pcb[p].getChildren().indexOf(targetPid);
+            pcb[p].removeChild(index);
+            pcb[targetPid] = null;
 
-		} while (pcb[index].getChildren().size() > 0);
-    
+        }
         return 0;
     }
 
