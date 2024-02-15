@@ -111,14 +111,15 @@ public class Version1 {
         }else{
             for (int q : pcb[targetPid].getChildren()) {
                 destroy(q);
-                //pcb[q] = null;
-                //pcb[targetPid] = null;
-                //int p = pcb[targetPid].getParent();
+                pcb[q] = null;
+                int p = pcb[q].getParent();
+                int index = pcb[p].getChildren().indexOf(q);
+                pcb[p].removeChild(index);
             }
-            int p = pcb[targetPid].getParent();
-            int index = pcb[p].getChildren().indexOf(targetPid);
-            pcb[p].removeChild(index);
-            pcb[targetPid] = null;
+            // int p = pcb[targetPid].getParent();
+            // int index = pcb[p].getChildren().indexOf(targetPid);
+            // pcb[p].removeChild(index);
+            // pcb[targetPid] = null;
 
         }
         return 0;
