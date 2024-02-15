@@ -82,6 +82,8 @@ public class Program1 {
                 v1.create(userNum);
                 //Version2 v2 = new Version2();
                 v2.create(userNum);
+
+                System.out.println(userIn + userNum);
                 userNum = 0;
 
             }else
@@ -100,8 +102,11 @@ public class Program1 {
                 v1.destroy(userNum);
                 //Version2 v2 = new Version2();
                 v2.destroy(userNum);
+
+                System.out.println(userIn + userNum);
                 userNum = 0;
             }
+            //System.out.println(userIn + userNum);
         }
 
         //time complexity
