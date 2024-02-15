@@ -117,8 +117,8 @@ public class Version1 {
             }
             int p = pcb[targetPid].getParent();
             int index = pcb[p].getChildren().indexOf(targetPid);
-            pcb[p].removeChild(index);
-            pcb[targetPid] = null;
+            //pcb[p].removeChild(index);
+            //pcb[targetPid] = null;
 
         }
         return 0;
