@@ -9,6 +9,8 @@
  */
 package compsci424.p1.java;
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * Main class for this program. The required steps have been copied
@@ -33,6 +35,9 @@ public class Program1 {
         int userNum = 0;
         Version1 v1 = new Version1();
         Version2 v2 = new Version2();
+        ArrayList<String> commands = new ArrayList<>();
+        ArrayList<Integer> commandInts = new ArrayList<>();
+
         //System.out.println("Create, Destroy or End, where N is an integer between 0 and 15");
         //userIn = sc.nextLine();
 
@@ -60,8 +65,29 @@ public class Program1 {
                 //     v2.showProcessInfo();
                 // }
                 //v1.create(0);
-                v1.showProcessInfo();
+                for(int i = 0; i < commands.size(); i++){
+                    String com = commands.get(i);
+                    if(com.equals("create")){
+                        v1.create(commandInts.get(i));
+                        v1.showProcessInfo();
+                    }else{
+                        v1.destroy(commandInts.get(i));
+                        v1.showProcessInfo();
+                    }
+                }
+                //v1.showProcessInfo();
                 //v2.create(0);
+
+                for(int j = 0; j < commands.size(); j++){
+                    String com = commands.get(j);
+                    if(com.equals("create")){
+                        v2.create(commandInts.get(j));
+                        v2.showProcessInfo();
+                    }else{
+                        v2.destroy(commandInts.get(j));
+                        v2.showProcessInfo();
+                    }
+                }
                 v2.showProcessInfo();
                 break;
             }
@@ -79,9 +105,11 @@ public class Program1 {
                 // }
 
                 //Version1 v1 = new Version1();
-                v1.create(userNum);
+                //v1.create(userNum);
                 //Version2 v2 = new Version2();
-                v2.create(userNum);
+                //v2.create(userNum);
+                commands.add("create");
+                commandInts.add(userNum);
 
                 System.out.println(userIn + userNum);
                 userNum = 0;
@@ -99,9 +127,12 @@ public class Program1 {
                 // }
 
                 //Version1 v1 = new Version1();
-                v1.destroy(userNum);
+                //v1.destroy(userNum);
                 //Version2 v2 = new Version2();
-                v2.destroy(userNum);
+                //v2.destroy(userNum);
+
+                commands.add("destroy");
+                commandInts.add(userNum);
 
                 System.out.println(userIn + userNum);
                 userNum = 0;

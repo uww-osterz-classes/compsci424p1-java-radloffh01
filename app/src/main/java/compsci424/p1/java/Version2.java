@@ -79,53 +79,98 @@ public class Version2 {
         if(pcb[targetPid] == null){
             System.out.println("Error: That process isn't running");
         }else{
-            destroy(targetPid, targetPid);
+            if(pcb[targetPid].getFirstChild() != -1){
+                destroy(pcb[targetPid].getFirstChild());
+                pcb[targetPid].setFirstChild(-1);
+            }else if(pcb[targetPid].getYoungSib() != -1){
+                destroy(pcb[targetPid].getYoungSib());
+                pcb[targetPid].setYoungSib(-1);
+                //pcb[targetPid] = null;
+            }
+            //pcb[targetPid].setFirstChild(-1);
+            //pcb[targetPid].setYoungSib(-1);
+            //int p = pcb[targetPid].getParent();
+
+            //if targetPid has and older and younger sibling
+            if(pcb[targetPid].getOldSib() != -1 && pcb[targetPid].getYoungSib() != -1){
+                int os = pcb[targetPid].getOldSib();
+                int ys = pcb[targetPid].getYoungSib();
+                pcb[os].setYoungSib(ys);
+                pcb[ys].setOldSib(os);
+
+            //if targetPid has an older sibling
+            }else if(pcb[targetPid].getOldSib() != -1 && pcb[targetPid].getYoungSib() == -1){
+                int os = pcb[targetPid].getOldSib();
+                pcb[os].setYoungSib(-1);
+
+                //if targetPid has a younger sibling
+            }else if(pcb[targetPid].getOldSib() == -1 && pcb[targetPid].getYoungSib() != -1){
+                int ys = pcb[targetPid].getYoungSib();
+                int p = pcb[targetPid].getParent();
+                pcb[p].setFirstChild(ys);
+            }else{ //if targetPid is only child of parent
+                int p = pcb[targetPid].getParent();
+                pcb[p].setFirstChild(-1);
+            }
+            pcb[targetPid] = null;
         }
+
+
+
         return 0;
     }
-    int destroy (int index, int parent) {
-        // If targetPid is not in the process hierarchy, do nothing; 
-        // your code may return an error code or message in this case,
-        // but it should not halt
-            do {
-                if (pcb[index].getFirstChild() != -1) { //Checks for children
-                    destroy(pcb[index].getFirstChild(), parent);
-                    pcb[index].setFirstChild(-1);
-                }
-                else if (pcb[index].getYoungSib() != -1) { //Check for younger siblings
-                    destroy(pcb[index].getYoungSib(), parent);
-                    pcb[index].setYoungSib(-1);
-                }
-                else if (index != parent) { //If not parent that origionally called function
-                    //delete v2[index];
+
+//     int destroy(int targetPid){
+//         if(pcb[targetPid] == null){
+//             System.out.println("Error: That process isn't running");
+//         }else{
+//             destroy(targetPid, targetPid);
+//         }
+//         return 0;
+//     }
+//     int destroy (int index, int parent) {
+//         // If targetPid is not in the process hierarchy, do nothing; 
+//         // your code may return an error code or message in this case,
+//         // but it should not halt
+//             do {
+//                 if (pcb[index].getFirstChild() != -1) { //Checks for children
+//                     destroy(pcb[index].getFirstChild(), parent);
+//                     pcb[index].setFirstChild(-1);
+//                 }
+//                 else if (pcb[index].getYoungSib() != -1) { //Check for younger siblings
+//                     destroy(pcb[index].getYoungSib(), parent);
+//                     pcb[index].setYoungSib(-1);
+//                 }
+//                 else if (index != parent) { //If not parent that origionally called function
+//                     //delete v2[index];
                     
-                    pcb[index] = null;
-                    break;
-                }
-                else{
-                    break;
-                }
+//                     pcb[index] = null;
+//                     break;
+//                 }
+//                 else{
+//                     break;
+//                 }
                 
-            }while (true);
+//             }while (true);
         
     
     
 
-        // Assuming you've found the PCB for targetPid in the PCB array:
-        // 1. Recursively destroy all descendants of targetPid, if it
-        //    has any, and mark their PCBs as "free" in the PCB array 
-        //    (i.e., deallocate them)
+//         // Assuming you've found the PCB for targetPid in the PCB array:
+//         // 1. Recursively destroy all descendants of targetPid, if it
+//         //    has any, and mark their PCBs as "free" in the PCB array 
+//         //    (i.e., deallocate them)
 
-        // 2. Adjust connections within the hierarchy graph as needed to
-        //    re-connect the graph
+//         // 2. Adjust connections within the hierarchy graph as needed to
+//         //    re-connect the graph
 
-        // 3. Deallocate targetPid's PCB and mark its PCB array entry
-        //    as "free"
+//         // 3. Deallocate targetPid's PCB and mark its PCB array entry
+//         //    as "free"
 
-        // You can decide what the return value(s), if any, should be.
-        // If you change the return type/value(s), update the Javadoc.
-       return 0; // often means "success" or "terminated normally"
-   }
+//         // You can decide what the return value(s), if any, should be.
+//         // If you change the return type/value(s), update the Javadoc.
+//        return 0; // often means "success" or "terminated normally"
+//    }
 
    /**
     * Traverse the process creation hierarchy graph, printing
@@ -141,12 +186,6 @@ public class Version2 {
         for(int i = 0; i < pcb.length-1; i++){
             if(pcb[i] != null){
                 
-            
-            //LinkedList<Integer> childList = new LinkedList<Integer>();
-            // int child = pcb[i].getFirstChild();
-            // while(pcb[child].getYoungSib() != -1){
-            //     childList.add(child);
-            // }
             System.out.print("Process " + i + ": parent is " + pcb[i].getParent());
             if(pcb[i].getFirstChild() == -1){
                 System.out.println(" and has no children");
