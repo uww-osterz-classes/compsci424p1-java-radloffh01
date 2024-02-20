@@ -120,38 +120,7 @@ public class Version2 {
         return 0;
     }
 
-//     int destroy(int targetPid){
-//         if(pcb[targetPid] == null){
-//             System.out.println("Error: That process isn't running");
-//         }else{
-//             destroy(targetPid, targetPid);
-//         }
-//         return 0;
-//     }
-//     int destroy (int index, int parent) {
-//         // If targetPid is not in the process hierarchy, do nothing; 
-//         // your code may return an error code or message in this case,
-//         // but it should not halt
-//             do {
-//                 if (pcb[index].getFirstChild() != -1) { //Checks for children
-//                     destroy(pcb[index].getFirstChild(), parent);
-//                     pcb[index].setFirstChild(-1);
-//                 }
-//                 else if (pcb[index].getYoungSib() != -1) { //Check for younger siblings
-//                     destroy(pcb[index].getYoungSib(), parent);
-//                     pcb[index].setYoungSib(-1);
-//                 }
-//                 else if (index != parent) { //If not parent that origionally called function
-//                     //delete v2[index];
-                    
-//                     pcb[index] = null;
-//                     break;
-//                 }
-//                 else{
-//                     break;
-//                 }
-                
-//             }while (true);
+
         
     
     

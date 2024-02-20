@@ -91,23 +91,12 @@ public class Program1 {
                 v2.showProcessInfo();
                 break;
             }
-            userNum = sc.nextInt();
+            //userNum = sc.nextInt();
             //System.out.println(userNum);
 
             //if create
             if(userIn.equals("create")){
-                // System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
-                // userNum = sc.nextInt();
-                // while(userNum < 0 || userNum > 15){
-                //     System.out.println("Invalid Integer, try again");
-                //     System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
-                //     userNum = sc.nextInt();
-                // }
-
-                //Version1 v1 = new Version1();
-                //v1.create(userNum);
-                //Version2 v2 = new Version2();
-                //v2.create(userNum);
+                userNum = sc.nextInt();
                 commands.add("create");
                 commandInts.add(userNum);
 
@@ -118,18 +107,7 @@ public class Program1 {
 
             //if destroy
             if(userIn.equals("destroy")){
-                // System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
-                // userNum = sc.nextInt();
-                // while(userNum < 0 || userNum > 15){
-                //     System.out.println("Invalid Integer, try again");
-                //     System.out.println("Enter an Integer N, where N is an intger between 0 and 15");
-                //     userNum = sc.nextInt();
-                // }
-
-                //Version1 v1 = new Version1();
-                //v1.destroy(userNum);
-                //Version2 v2 = new Version2();
-                //v2.destroy(userNum);
+                userNum = sc.nextInt();
 
                 commands.add("destroy");
                 commandInts.add(userNum);
@@ -141,38 +119,52 @@ public class Program1 {
         }
 
         //time complexity
-        // long startTime = System.currentTimeMillis();
-        // //Version1 v1 = new Version1();
-        // for(int i = 0; i <= 200; i++){
-        //     int method = (int)Math.random() * 2;
-        //     int number = (int)Math.random() * 15;
-        //     if(method == 0){
-        //         v1.create(number);
-        //     }
-        //     if(method == 1 || method == 2){
-        //         v1.destroy(number);
-        //     }
-        // }
-        // long stopTime = System.currentTimeMillis();
-        // long runTime = stopTime-startTime;
-        // System.out.println("Version 1 Run Time: " + runTime);
+        //version 1
+        long startTime = System.currentTimeMillis();
+        if(commands.size() < 2){
+            for(int i = 0; i < 200; i++){
+                v1.create(0);
+                v1.destroy(1);
+            }
+        }else{
+            for(int i = 0; i < 200; i++){
+                for(int j = 0; j < commands.size(); j++){
+                    String com = commands.get(j);
+                    if(com.equals("create")){
+                        v1.create(commandInts.get(j));
+                    }else{
+                        v1.destroy(commandInts.get(j));
+                    }
+                }
+            }
+        }
+        long stopTime = System.currentTimeMillis();
+        long runTime = stopTime-startTime;
+        System.out.println("Version 1 Run Time: " + runTime + "/n");
 
+        //version 2
+        startTime = System.currentTimeMillis();
+        if(commands.size() < 2){
+            for(int i = 0; i < 200; i++){
+                v2.create(0);
+                v2.destroy(1);
+            }
+        }else{
+            for(int i = 0; i < 200; i++){
+                for(int j = 0; j < commands.size(); j++){
+                    String com = commands.get(j);
+                    if(com.equals("create")){
+                        v2.create(commandInts.get(j));
+                    }else{
+                        v2.destroy(commandInts.get(j));
+                    }
+                }
+            }
+        }
 
-        // startTime = System.currentTimeMillis();
-        // //Version1 v2 = new Version1();
-        // for(int i = 0; i <= 200; i++){
-        //     int method = (int)Math.random() * 2;
-        //     int number = (int)Math.random() * 15;
-        //     if(method == 0){
-        //         v2.create(number);
-        //     }
-        //     if(method == 1 || method == 2){
-        //         v2.destroy(number);
-        //     }
-        // }
-        // stopTime = System.currentTimeMillis();
-        // runTime = stopTime-startTime;
-        // System.out.println("Version 2 Run Time: " + runTime);
+        stopTime = System.currentTimeMillis();
+        runTime = stopTime-startTime;
+        System.out.println("Version 2 Run Time: " + runTime);
         // 3. When the user types "end" (or optionally any word that 
         //    is not "create" or "destroy"), stop accepting commands 
         //    and complete the following steps.
